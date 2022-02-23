@@ -14,6 +14,7 @@ import {detectCollision} from '../CollisionDetection';
 class Brick {
     constructor(game, position) {
         this.image = document.getElementById('imgBrick');
+        this.imageSolid = document.getElementById('imgBrickSolid');
 
         this.game = game;
 
@@ -33,7 +34,8 @@ class Brick {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+        let image = this.image;
+        ctx.drawImage(image, this.position.x, this.position.y, this.width, this.height);
     }
 
 }
