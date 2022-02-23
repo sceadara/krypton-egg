@@ -1,13 +1,13 @@
 {
-  "name": "app-test-game",
-  "description": "First game dev test stuff",
+  "name": "krypton-egg",
+  "description": "Iam learning how to create a breakout like krypton egg from scratch in JS",
   "source": "src/index.html",
   "license": "CC-BY-NC-SA-4.0",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "author": "Chris Kirchmaier <trash@nandecore.net> (https://nandecore.net)",
   "repository": "git://github.com/sceadara/app-test-game.git",
   "scripts": {
-    "dev": "parcel",
+    "dev": "parcel --open",
     "build": "parcel build"
   },
   "devDependencies": {
