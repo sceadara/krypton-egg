@@ -1,0 +1,25 @@
+{
+  "name": "app-test-game",
+  "description": "First game dev test stuff",
+  "source": "src/index.html",
+  "license": "CC-BY-NC-SA-4.0",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "author": "Chris Kirchmaier <trash@nandecore.net> (https://nandecore.net)",
+  "repository": "git://github.com/sceadara/app-test-game.git",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@parcel/babel-plugin-transform-runtime": "^2.3.2",
+    "@parcel/babel-preset-env": "^2.3.2",
+    "@parcel/transformer-sass": "2.3.2",
+    "eslint": "^8.9.0",
+    "parcel": "^2.3.2"
+  },
+  "version": "1.0.0",
+  "main": "index.js"
+}
