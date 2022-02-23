@@ -4,7 +4,7 @@
  * (c)
  */
 
-import {detectCollision} from '../CollisionDetection';
+import {collisionDetection} from '../CollisionDetection';
 
 /**
  * A ball object.
@@ -20,28 +20,29 @@ class Ball {
 
         this.game = game;
 
-        this.size = 24;
+        this.size = 16;
 
         this.reset();
     }
 
     reset() {
-        this.speed = {x: 5, y: 2};
-        this.position = {x: 60, y: 200};
+        this.speed = {x: 6, y: 2};
+        this.position = {x: this.game.paddle.position.x + this.game.paddle.width / 2, y: this.game.paddle.position.y + this.size };
     }
 
     update() {
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
 
+
         // Collision wall left or right
         if(this.position.x + this.size > this.gameWidth + 57 || this.position.x < 57) {
-            this.speed.x = -this.speed.x;
+            this.speed.x *= -1;
         }
 
         // Collision wall top
         if(this.position.y < 27) {
-            this.speed.y = -this.speed.y;
+            this.speed.y *= -1;
         }
 
         // Collision wall bottom
@@ -50,8 +51,14 @@ class Ball {
             this.game.lives--;
         }
 
-        if(detectCollision(this, this.game.paddle)) {
-            this.speed.y = -this.speed.y;
+        if(collisionDetection(this, this.game.paddle)) {
+            if (this.position.x < this.game.paddle.position.x + this.game.paddle.width / 4) {
+                this.speed.x--;
+            }
+            if (this.position.x > this.game.paddle.position.x + this.game.paddle.width - this.game.paddle.width / 4) {
+                this.speed.x++;
+            }
+            this.speed.y *= -1;
             this.position.y = this.game.paddle.position.y - this.size;
         }
     }

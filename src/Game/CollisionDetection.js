@@ -12,7 +12,7 @@
  *
  * @returns {boolean}
  */
-export function detectCollision(ball, gameObject) {
+const collisionDetection = (ball, gameObject) => {
     let topOfBall = ball.position.y;
     let bottomOfBall = ball.position.y + ball.size;
 
@@ -23,6 +23,8 @@ export function detectCollision(ball, gameObject) {
 
     return bottomOfBall >= topOfObject
         && topOfBall <= bottomOfObject
-        && ball.position.x >= leftOfObject
-        && ball.position.x + ball.size <= rightOfObject;
-}
+        && ball.position.x + ball.size >= leftOfObject
+        && ball.position.x <= rightOfObject;
+};
+
+export {collisionDetection};
