@@ -7,7 +7,7 @@
 import Ball from './Objects/Ball';
 import InputHandler from './InputHandler';
 import Paddle from './Objects/Paddle';
-import {buildLevel, level_01, level_02} from './Levels/Levels';
+import {buildLevel, level_01, level_debug} from './Levels/Levels';
 import {GAMESTATE} from './Constants';
 
 /**
@@ -25,13 +25,12 @@ class Game {
         this.paddle = new Paddle(this);
         this.ball = new Ball(this);
 
-
         this.gameObjects = [];
         this.bricks = [];
         this.lives = 4;
         this.score = 0;
 
-        this.levels = [level_01, level_02];
+        this.levels = [level_debug, level_01];
         this.currentLevel = 0;
 
         new InputHandler(this.paddle, this);
@@ -43,6 +42,8 @@ class Game {
         }
 
         this.bricks = buildLevel(this, this.levels[this.currentLevel]);
+        this.solidBricks = [];
+
         this.ball.reset();
 
         this.gameObjects = [
@@ -75,17 +76,18 @@ class Game {
             return;
         }
 
-        if (this.bricks.length === 0) {
-            this.gamestate = GAMESTATE.NEWLEVEL;
-            this.currentLevel++;
-            this.start();
-        }
-
         // that?
         if (this.gamestate === GAMESTATE.RUNNING) {
+            if (this.bricks.length === this.solidBricks.length) {
+                this.gamestate = GAMESTATE.NEWLEVEL;
+                this.currentLevel++;
+                this.start();
+            }
+
             [...this.gameObjects, ...this.bricks].forEach(obj => obj.update(delta));
 
             this.bricks = this.bricks.filter(brick => !brick.markedToDestroyed);
+            this.solidBricks = this.bricks.filter(brick => brick.isSolid);
         }
     }
 
